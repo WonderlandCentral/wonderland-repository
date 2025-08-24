@@ -1,6 +1,6 @@
 # Wonderland Maven Repository
 
-## Usage
+### Usage
 ```xml
 <repositories>
         <repository>

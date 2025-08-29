@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata>
-  <groupId>com.github.ViaVersion</groupId>
-  <artifactId>ViaVersion</artifactId>
+  <groupId>dev.firstdark.discordrpc</groupId>
+  <artifactId>discord-rpc</artifactId>
   <versioning>
     <release>1.0.1</release>
     <versions>

@@ -4,6 +4,6 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.github.nevalackin</groupId>
   <artifactId>homo-bus</artifactId>
-  <version>1.0.0/version>
+  <version>1.0.0</version>
   <description>POM was created from install:install-file</description>
 </project>

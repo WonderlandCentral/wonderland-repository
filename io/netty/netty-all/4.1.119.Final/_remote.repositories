@@ -1,4 +1,2 @@
-#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
-#Thu Jul 31 14:21:10 CEST 2025
-netty-all-4.1.119.Final.pom>=
 netty-all-4.1.119.Final.jar>=
+netty-all-4.1.119.Final.pom>=

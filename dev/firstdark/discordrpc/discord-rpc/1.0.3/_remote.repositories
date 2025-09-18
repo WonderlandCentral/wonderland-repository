@@ -1,4 +1,2 @@
-#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
-#Fri Jul 25 15:11:58 CEST 2025
-discord-rpc-1.0.3.pom>=
 discord-rpc-1.0.3.jar>=
+discord-rpc-1.0.3.pom>=

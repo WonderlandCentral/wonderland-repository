@@ -1,4 +1,2 @@
-#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
-#Fri Jul 25 15:11:58 CEST 2025
-ViaVersion-5.4.2.pom>=
 ViaVersion-5.4.2.jar>=
+ViaVersion-5.4.2.pom>=

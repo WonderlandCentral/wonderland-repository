@@ -1,4 +1,2 @@
-#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
-#Fri Jul 25 15:11:58 CEST 2025
-yt-dlp-java-1.0.pom>=
 yt-dlp-java-1.0.jar>=
+yt-dlp-java-1.0.pom>=

@@ -1,4 +1,2 @@
-#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
-#Fri Jul 25 14:08:24 CEST 2025
-twitch-6.5.pom>=
 twitch-6.5.jar>=
+twitch-6.5.pom>=

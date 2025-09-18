@@ -1,4 +1,2 @@
-#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
-#Fri Jul 25 13:57:56 CEST 2025
 log4j-core-2.0-beta9-fixed.jar>=
 log4j-core-2.0-beta9-fixed.pom>=

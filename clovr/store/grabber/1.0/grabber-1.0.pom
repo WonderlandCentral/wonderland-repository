@@ -4,6 +4,6 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>clovr.store</groupId>
-    <artifactId>Grabber</artifactId>
+    <artifactId>grabber</artifactId>
     <version>1.0</version>
 </project>

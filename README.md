@@ -13,5 +13,5 @@ Maven
 
 Gradle
 ```groovy
- maven { url "https://raw.github.com/WonderlandCentral/wonderland-repository/main" }
+ maven { url "https://raw.githubusercontent.com/WonderlandCentral/wonderland-repository/main" }
 ```

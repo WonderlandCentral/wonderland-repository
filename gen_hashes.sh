@@ -58,8 +58,58 @@ $pom_filename>=
 EOF
 }
 
-# Root is current directory
-ROOT_DIR="$(pwd)"
+# Generate maven-metadata-local.xml
+generate_metadata_xml() {
+    local artifact_dir=$1
+
+    version_dirs=()
+    while IFS= read -r -d '' dir; do
+        version_dirs+=("$(basename "$dir")")
+    done < <(find "$artifact_dir" -mindepth 1 -maxdepth 1 -type d -print0)
+
+    if [[ ${#version_dirs[@]} -eq 0 ]]; then
+        return
+    fi
+
+    # Sort versions (lexical)
+    IFS=$'\n' sorted_versions=($(sort <<<"${version_dirs[*]}"))
+    latest_version="${sorted_versions[-1]}"
+
+    # Determine groupId and artifactId
+    rel_path="${artifact_dir#./}"  # Remove leading ./
+    group_path=$(dirname "$rel_path")   # e.g., com/viaversion
+    artifactId=$(basename "$artifact_dir")
+    groupId=${group_path//\//.}
+
+    # Generate timestamp
+    timestamp=$(date -u +"%Y%m%d%H%M%S")
+
+    metadata_path="$artifact_dir/maven-metadata-local.xml"
+
+    {
+        echo '<?xml version="1.0" encoding="UTF-8"?>'
+        echo '<metadata>'
+        echo "  <groupId>${groupId}</groupId>"
+        echo "  <artifactId>${artifactId}</artifactId>"
+        echo "  <versioning>"
+        echo "    <release>${latest_version}</release>"
+        echo "    <versions>"
+        for v in "${sorted_versions[@]}"; do
+            echo "      <version>${v}</version>"
+        done
+        echo "    </versions>"
+        echo "    <lastUpdated>${timestamp}</lastUpdated>"
+        echo "  </versioning>"
+        echo "</metadata>"
+    } > "$metadata_path"
+
+    echo "Generated maven-metadata-local.xml: $metadata_path"
+}
+
+# ===== MAIN =====
+
+# Track artifact directories for metadata generation
+declare -A artifact_dirs=()
 
 # Find all .jar files under current directory
 find . -type f -name "*.jar" | while read -r jar_path; do
@@ -71,11 +121,14 @@ find . -type f -name "*.jar" | while read -r jar_path; do
 
     version=$(basename "$dir_path")
     artifactId=$(basename "$(dirname "$dir_path")")
+    artifact_dir="$(dirname "$dir_path")"
 
-    # Extract relative path from ROOT_DIR
-    rel_path="${dir_path#./}"  # remove leading ./
-    group_path=$(dirname "$(dirname "$rel_path")")  # e.g., com/viaversion
-    groupId=${group_path//\//.}  # replace / with .
+    # Store for metadata generation
+    artifact_dirs["$artifact_dir"]=1
+
+    rel_path="${dir_path#./}"
+    group_path=$(dirname "$(dirname "$rel_path")")
+    groupId=${group_path//\//.}
 
     pom_file="${artifactId}-${version}.pom"
     repo_file="_remote.repositories"
@@ -86,7 +139,7 @@ find . -type f -name "*.jar" | while read -r jar_path; do
     # Generate hashes for .jar
     generate_all_hashes "$jar_path"
 
-    # Generate .pom if missing
+    # Generate .pom
     if [[ ! -f "$full_pom_path" ]]; then
         generate_pom "$full_pom_path" "$groupId" "$artifactId" "$version"
         echo "Generated POM: $full_pom_path"
@@ -98,5 +151,10 @@ find . -type f -name "*.jar" | while read -r jar_path; do
     # Generate _remote.repositories
     generate_remote_repositories "$full_repo_path" "$filename" "$pom_file"
     echo "Generated _remote.repositories: $full_repo_path"
+done
+
+# After processing jars, generate metadata for each artifact
+for artifact_dir in "${!artifact_dirs[@]}"; do
+    generate_metadata_xml "$artifact_dir"
 done
 

@@ -5,9 +5,9 @@
   <versioning>
     <release>5.2.2</release>
     <versions>
-      <version>5.2.2</version>
       <version>5.0.4</version>
+      <version>5.2.2</version>
     </versions>
-    <lastUpdated>20250725131158</lastUpdated>
+    <lastUpdated>20250918210046</lastUpdated>
   </versioning>
 </metadata>

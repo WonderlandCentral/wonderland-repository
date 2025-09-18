@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata>
-  <groupId>io.netty</groupId>
-  <artifactId>mojang-netty-bootstrap</artifactId>
+  <groupId>fr.litarvan</groupId>
+  <artifactId>openauth</artifactId>
   <versioning>
-    <release>1.8.8</release>
+    <release>1.1.6</release>
     <versions>
-      <version>1.8.8</version>
+      <version>1.1.6</version>
     </versions>
     <lastUpdated>20250918210046</lastUpdated>
   </versioning>

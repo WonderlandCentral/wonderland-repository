@@ -127,8 +127,7 @@ EOF
 
 declare -A artifact_dirs=()
 
-# Process each jar
-find . -type f -name "*.jar" | while read -r jar_path; do
+while read -r jar_path; do
     echo "Processing: $jar_path"
 
     dir_path=$(dirname "$jar_path")
@@ -139,10 +138,8 @@ find . -type f -name "*.jar" | while read -r jar_path; do
     artifactId=$(basename "$(dirname "$dir_path")")
     artifact_dir="$(dirname "$dir_path")"
 
-    # Store artifact dir for metadata generation
     artifact_dirs["$artifact_dir"]=1
 
-    # Derive groupId
     rel_path="${dir_path#./}"
     group_path=$(dirname "$(dirname "$rel_path")")
     groupId=${group_path//\//.}
@@ -153,23 +150,14 @@ find . -type f -name "*.jar" | while read -r jar_path; do
     full_pom_path="$dir_path/$pom_file"
     full_repo_path="$dir_path/$repo_file"
 
-    # Generate hashes for .jar only if changed
     generate_all_hashes_if_needed "$jar_path"
-
-    # Generate .pom if missing or always overwrite?
-    # Let's overwrite if missing; if exists, we assume content based on path, so OK to overwrite every time
     generate_pom "$full_pom_path" "$groupId" "$artifactId" "$version"
     echo "Generated or updated POM: $full_pom_path"
-
-    # Generate hashes for pom, only if changed
     generate_all_hashes_if_needed "$full_pom_path"
-
-    # Generate remote repositories file (always, because content depends on jar & pom being present)
     generate_remote_repositories "$full_repo_path" "$filename" "$pom_file"
     echo "Generated _remote.repositories: $full_repo_path"
-done
+done < <(find . -type f -name "*.jar")
 
-# After processing all jars, generate metadata for each artifact
 for artifact_dir in "${!artifact_dirs[@]}"; do
     generate_metadata_xml "$artifact_dir"
 done

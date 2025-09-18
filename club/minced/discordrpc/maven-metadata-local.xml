@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>club.minced</groupId>
+  <artifactId>discordrpc</artifactId>
+  <versioning>
+    <release>2.0.1-all</release>
+    <versions>
+      <version>2.0.1-all</version>
+    </versions>
+    <lastUpdated>20250918210412</lastUpdated>
+  </versioning>
+</metadata>

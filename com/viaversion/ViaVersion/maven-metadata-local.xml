@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>com.viaversion</groupId>
+  <artifactId>ViaVersion</artifactId>
+  <versioning>
+    <release>5.7.1-SNAPSHOT</release>
+    <versions>
+      <version>5.7.1-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20260115151246</lastUpdated>
+  </versioning>
+</metadata>
